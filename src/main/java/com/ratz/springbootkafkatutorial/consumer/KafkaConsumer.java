@@ -3,6 +3,7 @@ package com.ratz.springbootkafkatutorial.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,8 @@ public class KafkaConsumer {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumer.class.getSimpleName());
 
-  @KafkaListener(topics = "myfirsttopoc", groupId = "myGroup")
+
+  @KafkaListener(topics = "${spring.kafka.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
   public void consume(String message){
 
     LOGGER.info("Consumed the message: " + message);
